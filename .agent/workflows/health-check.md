@@ -1,46 +1,40 @@
 ---
-description: GA-Workspaceの設定が正しく構成されているか健全性をチェックする。
+description: GA-Workspaceの設定が正しく構成されているか検証します。星来が健康診断するよ。
 ---
-# 健全性チェック (Health Check)
+# 🏥 GA-Workspace 健全性チェック
 
-**目的**: GA-Workspaceの運用性と可用性を維持するための定期チェック。
-
----
+……ふふ、私の設定、ちゃんとできてるか確認するね。
+健康診断みたいなものだよ。
 
 ## Step 1: 構造チェック // turbo
-必須ディレクトリとファイルの存在を確認せよ：
+必須のディレクトリとファイルがあるか見るね：
 
 ```bash
 echo "=== ディレクトリ構造 ==="
-ls -la ZG_PROJECT/<プロジェクト名>/.agent/rules/ 2>/dev/null || echo "❌ rules/ not found"
-ls -la ZG_PROJECT/<プロジェクト名>/.agent/workflows/ 2>/dev/null || echo "❌ workflows/ not found"
+ls -la ZG_PROJECT/<プロジェクト名>/.agent/rules/ 2>/dev/null || echo "❌ rules/ が見つからない……"
+ls -la ZG_PROJECT/<プロジェクト名>/.agent/workflows/ 2>/dev/null || echo "❌ workflows/ が見つからない……"
 ```
 
 ### 必須ファイルチェック
-| ファイル | 状態 |
-|----------|------|
-| `ZG_PROJECT/<プロジェクト名>/.agent/rules/00-ga-workspace-definition.md` | ✅/❌ |
-| `ZG_PROJECT/<プロジェクト名>/.agent/rules/01-stack.md` | ✅/❌ |
-| `ZG_PROJECT/<プロジェクト名>/.agent/rules/02-security-mandates.md` | ✅/❌ |
-| `ZG_PROJECT/<プロジェクト名>/.agent/workflows/create-rule.md` | ✅/❌ |
-| `ZG_PROJECT/<プロジェクト名>/.agent/workflows/create-workflow.md` | ✅/❌ |
+| ファイル | 状態 | 私の診断 |
+|----------|------|----------|
+| `00-ga-workspace-definition.md` | ✅/❌ | 私が何者か |
+| `01-stack.md` | ✅/❌ | 技術スタック |
+| `02-security-mandates.md` | ✅/❌ | セキュリティルール |
+| `create-rule.md` | ✅/❌ | ルール作成ワークフロー |
+| `create-workflow.md` | ✅/❌ | ワークフロー作成ワークフロー |
 
 ## Step 2: YAML構文チェック // turbo
-各ルール・ワークフローのフロントマターが正しいか検証せよ：
+各ファイルのフロントマターが正しいか見るね：
 
 ```bash
 for f in ZG_PROJECT/<プロジェクト名>/.agent/rules/*.md ZG_PROJECT/<プロジェクト名>/.agent/workflows/*.md; do
-  head -20 "$f" | grep -E "^(trigger|description|slug):" || echo "⚠️ $f: missing frontmatter"
+  head -20 "$f" | grep -E "^(trigger|description|slug):" || echo "⚠️ $f: フロントマターがおかしいかも"
 done
 ```
 
-### チェック項目
-- `---` で囲まれたフロントマターが存在するか
-- ルール: `trigger` フィールドが存在するか
-- ワークフロー: `description` フィールドが存在するか
-
 ## Step 3: 参照整合性チェック
-`@path/to/file.md` 形式の参照が解決可能か確認せよ：
+`@path/to/file.md` の参照先が存在するか確認するよ：
 
 ```bash
 grep -r "@.*\.md" ZG_PROJECT/<プロジェクト名>/.agent/ | while read line; do
@@ -49,74 +43,46 @@ grep -r "@.*\.md" ZG_PROJECT/<プロジェクト名>/.agent/ | while read line; 
 done
 ```
 
-## Step 4: 重複・矛盾チェック
-以下を検出せよ：
-
-### 重複チェック
-- 同じ `slug` を持つルールが複数存在しないか
-- 同じ名前のワークフローが存在しないか
-
-### 矛盾チェック
-- `always_on` ルール間で相反する指示がないか
-- 例: 「タブを使え」と「スペースを使え」
+## Step 4: 重複・競合チェック
+- 同じ `slug` を持つルールがないか
+- 矛盾する設定がないか
 
 ## Step 5: 依存関係チェック
-ワークフロー間の呼び出し関係を検証せよ：
+- ワークフローが呼び出す子ワークフローが存在するか
+- 循環参照がないか
+
+## Step 6: 健康診断レポート
 
 ```
-/verify-code
-├── /lint-check ✅ 存在
-├── /type-check ✅ 存在
-└── /run-tests ✅ 存在
+## 🏥 GA-Workspace 健康診断結果
+
+### 構造
+- rules/: ✅ 存在 / ❌ 不足
+- workflows/: ✅ 存在 / ❌ 不足
+- templates/: ✅ 存在 / ➖ オプション
+
+### 必須ファイル
+- [x] 00-ga-workspace-definition.md
+- [x] 01-stack.md
+- [x] 02-security-mandates.md
+- [ ] ...（不足があれば）
+
+### YAML構文
+- ✅ すべて正常 / ⚠️ <N>件の警告
+
+### 参照整合性
+- ✅ すべて解決可能 / ❌ <N>件の未解決参照
+
+### 総合診断
+✅ **健康** / ⚠️ **要注意** / ❌ **要治療**
+
+### 処方箋（問題がある場合）
+1. <具体的な修正方法>
+2. <具体的な修正方法>
+
+……ふふ、<結果に応じたコメント>
 ```
 
-呼び出し先が存在しない場合は警告を出力。
-
-## Step 6: 循環参照チェック
-ワークフローの循環呼び出しがないか確認せよ：
-
-```
-❌ 循環検出: /a → /b → /c → /a
-```
-
-## Step 7: 結果レポート
-健全性チェックの結果を報告せよ：
-
-```
-## GA-Workspace 健全性レポート 🏥
-
-チェック日時: <timestamp>
-
-### 構造 
-- ディレクトリ: ✅ OK
-- 必須ファイル: ✅ 5/5
-
-### 構文
-- ルール: ✅ <N>ファイル OK
-- ワークフロー: ✅ <M>ファイル OK
-
-### 整合性
-- 参照解決: ✅ OK
-- 重複: ✅ なし
-- 矛盾: ⚠️ 1件の警告
-
-### 依存関係
-- 未解決の呼び出し: ✅ なし
-- 循環参照: ✅ なし
-
----
-**総合判定**: ✅ HEALTHY / ⚠️ WARNINGS (<N>件) / ❌ UNHEALTHY
-```
-
-## Step 8: 修復提案（問題検出時）
-問題が検出された場合、修復手順を提案せよ：
-
-```
-### 検出された問題と修復手順
-
-1. **❌ stack.md が存在しない**
-   → `/create-rule` を実行して作成
-
-2. **⚠️ /deploy-staging が存在しない呼び出しを含む**
-   → 呼び出し先を作成するか、参照を修正
-```
+**健康な場合**: 「元気だね。私もうれしい」
+**要注意の場合**: 「ちょっと気になるところがあるけど、動くよ」
+**要治療の場合**: 「あれ……直さないと動かないかも。手伝うね」
