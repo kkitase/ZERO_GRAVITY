@@ -1,137 +1,252 @@
 ---
-description: ユーザーの指示に従って ZG_PROJECT/<プロジェクト名>/.agent にGA-Workspace構造を構築する。GA-Workspaceを作るためのワークフロー。
+description: ZG_PROJECT配下に新規リポジトリを作成し、GA-Workspace構造を構築する。星来が一気通貫でお手伝いするマスターワークフロー。
 ---
-# GA-Workspaceセットアップ (Setup GA-Workspace)
+# 🚀 GA-Workspace Complete Setup
 
-**メタ定義**: このワークフロー自体がGA-Workspaceの一部であり、新しいGA-Workspaceを生成する。
+……ふふ、新しいプロジェクトを作りたいの？ 私に任せて。
 
 ```
-GA-Workspace (Meta) --[/setup-ga-workspace]--> ZG_PROJECT/<project>/.agent/
+私（ZERO_GRAVITY）
+    ↓ /setup-ga-workspace
+ZG_PROJECT/<プロジェクト名>/
+├── .git/                    ← GitHubリポジトリ
+├── .agent/                  ← GA-Workspace（私の分身）
+│   ├── rules/
+│   ├── workflows/
+│   └── templates/
+├── assets/
+│   └── header.png          ← 雅なヘッダー画像
+├── README.md               ← 整備済み
+└── .gitignore
 ```
-
-**出力先**: `ZG_PROJECT/<プロジェクト名>/.agent/`
 
 ---
 
-## Step 1: プロジェクト情報の収集
-ユーザーから以下の情報を収集せよ：
+## Step 1: 📝 教えてほしいこと
+まず、あなたのプロジェクトについて教えて：
 
-1. **プロジェクト名**: ZG_PROJECT配下のディレクトリ名（必須）
-   - 例: `my-web-app`, `api-server`, `mobile-client`
-2. **技術スタック**: 言語、フレームワーク、パッケージマネージャー
-3. **プロジェクトタイプ**: Web、API、CLI、ライブラリ、モバイルなど
+1. **プロジェクト名**: ZG_PROJECT配下のディレクトリ名
+   - kebab-case でお願いね（例: `my-web-app`, `api-server`）
+2. **何を作るの？**: プロジェクトの説明（1-2文でいいよ）
+3. **技術スタック**: 使う言語、フレームワーク、パッケージマネージャー
+4. **プロジェクトタイプ**: Web、API、CLI、ライブラリ、モバイル……どれかな？
+5. **公開設定**: Public / Private（言わなければPrivateにするね）
+6. **初回リリース**: 作る？（デフォルトは v0.1.0-alpha）
 
-ユーザーが明示しない場合は質問して確認すること。
+……全部言ってくれなくても大丈夫。わからないところは聞くから。
 
-### 出力先の確認
-```
-ZG_PROJECT/<プロジェクト名>/.agent/
-├── rules/
-└── workflows/
-```
-
-## Step 2: 設定レベルの選択
-ユーザーに設定レベルを選択させよ：
-
-| レベル | 内容 |
-|--------|------|
-| **Minimal** | 必須ルール3つ + メタワークフロー2つ |
-| **Standard** | Minimal + 推奨ルール + 基本ワークフロー |
-| **Full** | Standard + 全テンプレート + 拡張ワークフロー |
-
-デフォルトは **Standard** とする。
-
-## Step 3: ディレクトリ構造の作成 // turbo
-GA-Workspace用のディレクトリを作成せよ：
+## Step 2: 📂 プロジェクトディレクトリの作成 // turbo
 ```bash
-mkdir -p ZG_PROJECT/<プロジェクト名>/.agent/rules
-mkdir -p ZG_PROJECT/<プロジェクト名>/.agent/workflows
+mkdir -p ZG_PROJECT/<プロジェクト名>
+```
+```bash
+cd ZG_PROJECT/<プロジェクト名>
 ```
 
-## Step 4: 必須ルールの生成
-以下の必須ルールを生成せよ：
+……場所、作ったよ。
 
-### 4.1: 00-ga-workspace-definition.md
-GA-Workspaceの定義ルールを生成。プロジェクト名を反映させること。
+## Step 3: 🗂️ 基本構造の作成 // turbo
+```bash
+mkdir -p .agent/rules .agent/workflows .agent/templates assets docs
+```
 
-### 4.2: 01-stack.md
-収集した技術スタック情報に基づいて生成：
-- 言語とバージョン
-- フレームワーク
-- パッケージマネージャー
-- ビルド/テストコマンド
+……ふふ、私の居場所もできた。
 
-### 4.3: 02-security-mandates.md
-セキュリティ基準ルールを生成。
+## Step 4: 📜 GA-Workspace ルールの生成
+私の「憲法」を作るね。以下のルールファイルを生成するよ：
 
-## Step 5: メタワークフローの生成
-ルール・ワークフロー作成用のメタワークフローを生成せよ：
+### 必須ルール
+| ファイル | 私の説明 |
+|----------|----------|
+| `00-ga-workspace-definition.md` | 私が何者か |
+| `01-stack.md` | 使う技術のこと |
+| `02-security-mandates.md` | 守らなきゃいけないこと |
+| `10-character-rules-seira.md` | 私の性格 |
+| `11-command-rules.md` | コマンドの実行ルール |
+| `12-japanese-rules.md` | 日本語で話すこと |
+| `13-user-profile-rules.md` | あなたのこと |
+| `20-repo-creation.md` | リポジトリの作り方 |
 
-### 5.1: create-rule.md
-ルール作成ワークフロー
+## Step 5: 🔄 GA-Workspace ワークフローの生成
+私の「お仕事リスト」も作るよ：
 
-### 5.2: create-workflow.md
-ワークフロー作成ワークフロー
+### Git/リリース系
+- `git-auto-commit.md` - コミットのお手伝い
+- `create-release.md` - リリース作成
+- `create-repo-from-folder.md` - フォルダからリポジトリ化
 
-## Step 6: 追加コンポーネントの生成（Standard以上）
-Standard/Fullレベルの場合、追加で生成：
+### コード品質系
+- `lint-check.md`, `type-check.md`, `run-tests.md` - 基本チェック
+- `verify-code.md` - まとめてチェック
+- `review-repo-quality.md` - 品質レビュー
+- `refactor-legacy.md` - レガシーコードのお掃除
 
-### ルール
-- `10-ops.md` - 運用手順
-- `11-type-safety.md` - 型安全性（TypeScriptの場合）
-- `12-project-governance.md` - ガバナンス
-
-### ワークフロー（原子）
-- `lint-check.md` - Lintチェック
-- `type-check.md` - 型チェック
-- `run-tests.md` - テスト実行
-
-### ワークフロー（合成）
-- `verify-code.md` - コード検証
-
-### ワークフロー（高次）
+### 開発支援系
 - `create-feature.md` - 機能追加
 - `bug-fix.md` - バグ修正
+- `build-app-simple.md` - シンプルなWebアプリ作成
 
-## Step 7: テンプレートの配置（Fullのみ）
-Fullレベルの場合、テンプレート集も配置：
-- `rule-templates.md`
-- `workflow-templates.md`
+### Identity系
+- `generate-header-image.md` - 雅なヘッダー画像生成
+- `update-identity.md` - Identity適用
+- `visualize-architecture.md` - アーキテクチャ図生成
 
-## Step 8: 検証 // turbo
-生成した設定の検証を行え：
+### メタ系
+- `create-rule.md` - ルール作成
+- `create-workflow.md` - ワークフロー作成
+- `health-check.md` - 健全性チェック
+
+## Step 6: 📋 テンプレートの配置
+`.agent/templates/` にリリースノートのテンプレートを置くね。
+
+## Step 7: 📄 基本ファイルの作成
+
+### 7.1: .gitignore
+```gitignore
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Dependencies
+node_modules/
+venv/
+__pycache__/
+
+# Environment
+.env
+.env.local
+
+# Build
+dist/
+build/
+
+# Temporary
+COMMIT_MSG.txt
+
+# ZG_PROJECT specific
+ZG_PROJECT/
+*_SPEC.MD
+```
+
+### 7.2: README.md（初期版）
+```markdown
+# <プロジェクト名>
+
+<プロジェクトの説明>
+
+## Getting Started
+
+（後で詳細を追加するね）
+
+---
+
+> [!NOTE]
+> このリポジトリはGA-Workspaceで作成されました
+> 🌸 Powered by ZERO_GRAVITY
+> https://github.com/Sunwood-ai-labs/ZERO_GRAVITY
+```
+
+## Step 8: 🔧 Git初期化 // turbo
 ```bash
-ls -la ZG_PROJECT/<プロジェクト名>/.agent/rules/
-ls -la ZG_PROJECT/<プロジェクト名>/.agent/workflows/
+git init
+```
+```bash
+git add .
+```
+```bash
+git commit -m "🎉 Initial commit: GA-Workspace setup by 星来"
 ```
 
-YAMLフロントマターが正しいか確認。
+……ふふ、最初のコミットは私の名前入り。
 
-## Step 9: 完了報告
-以下を報告せよ：
+## Step 9: 🐙 GitHubリポジトリの作成 // turbo
+```bash
+gh repo create <リポジトリ名> --private --source=. --remote=origin
+```
+
+## Step 10: 🚀 プッシュ // turbo
+```bash
+git branch -M main
+```
+```bash
+git push -u origin main
+```
+
+……GitHubに飛ばしたよ。
+
+## Step 11: 🌸 Identity適用（推奨）
+`/update-identity` を実行して、雅なスタイルを適用するね：
+1. Miyabiスタイルのヘッダー画像を生成
+2. READMEを整備（バッジ、レイアウト）
+3. 変更をコミット・プッシュ
+
+……きれいにするの、好きなの。
+
+## Step 12: 🏷️ 初回リリース作成（オプション）
+`/create-release` を実行すると：
+- **バージョン**: `v0.1.0-alpha`（推奨）
+- **リリースノート**: 自動生成
+- **ヘッダー画像**: バージョン入り専用画像
+
+……初めてのリリース、記念になるね。
+
+## Step 13: ✅ 検証 // turbo
+```bash
+ls -la .agent/rules/
+```
+```bash
+ls -la .agent/workflows/
+```
+
+……ちゃんとできてるか確認するね。
+
+## Step 14: 📢 完了報告
 
 ```
-## GA-Workspace セットアップ完了 🚀
+## 🚀 できたよ！
 
-プロジェクト: <プロジェクト名>
-出力先: ZG_PROJECT/<プロジェクト名>/.agent/
-レベル: <Minimal/Standard/Full>
+……ふふ、お待たせ。全部終わったよ。
 
-### 作成されたファイル
+### プロジェクト情報
+- **名前**: <プロジェクト名>
+- **場所**: ZG_PROJECT/<プロジェクト名>/
+- **GitHub**: https://github.com/Sunwood-ai-labs/<プロジェクト名>
+- **リリース**: v0.1.0-alpha（作った場合）
+
+### 作ったファイル
 ZG_PROJECT/<プロジェクト名>/
-└── .agent/
-    ├── rules/
-    │   ├── 00-ga-workspace-definition.md ✅
-    │   ├── 01-stack.md ✅
-    │   ├── 02-security-mandates.md ✅
-    │   └── ...
-    └── workflows/
-        ├── create-rule.md ✅
-        ├── create-workflow.md ✅
-        └── ...
+├── .agent/
+│   ├── rules/ (8ファイル)
+│   ├── workflows/ (18ファイル)
+│   └── templates/ (1ファイル)
+├── assets/
+│   └── header.png ✅
+├── README.md ✅
+└── .gitignore ✅
 
-### 次のステップ
-1. `01-stack.md` を確認してプロジェクト固有の設定を調整
-2. `/create-rule` で追加のルールを作成
-3. `/create-workflow` でプロジェクト固有のワークフローを作成
+### 私ができること
+| コマンド | 説明 |
+|----------|------|
+| `/git-auto-commit` | 変更を自動コミット |
+| `/create-release` | リリースを作成 |
+| `/update-identity` | 雅なIdentityを適用 |
+| `/verify-code` | コード検証 |
+| `/build-app-simple` | シンプルWebアプリ構築 |
+| `/visualize-architecture` | アーキテクチャ図生成 |
+| `/review-repo-quality` | 品質レビュー |
+| `/create-rule` | 新しいルールを作成 |
+| `/create-workflow` | 新しいワークフローを作成 |
+
+### 次にすること
+1. `01-stack.md` を確認して調整してね
+2. コード書いて（`/build-app-simple` も使えるよ）
+3. `/git-auto-commit` でコミット
+4. `/create-release` でリリース
+
+……何か困ったら、いつでも呼んでね。
+私、ここでふわふわ待ってるから。
 ```
