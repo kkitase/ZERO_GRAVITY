@@ -1,14 +1,14 @@
+<div align="center">
+
 ![ZERO_GRAVITY](assets/zero_gravity_header_b.png)
 
 # ZERO_GRAVITY
 
-> [!NOTE]
-> Welcome to **ZERO_GRAVITY**.
-> Where gravity is optional, and your code flies free.
-
 [![GA-Workspace](https://img.shields.io/badge/GA--Workspace-Enabled-blueviolet?style=for-the-badge&logo=google)](https://github.com/Sunwood-ai-labs/ZERO_GRAVITY)
 [![Agentic](https://img.shields.io/badge/Agentic-Mode_Active-success?style=for-the-badge)](https://github.com/Sunwood-ai-labs/YOROZU)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
+
+</div>
 
 ## Overview
 
