@@ -15,26 +15,26 @@
 
 ## Overview
 
-**ZERO_GRAVITY** is a meta-framework repository for **GA-Workspace** (Google Antigravity Workspace).
-This project is an experimental platform designed to provide a new development experience, free from the constraints (gravity) of traditional development processes, and serves as the foundation for next-generation agent-driven development.
+**ZERO_GRAVITY** は、**GA-Workspace** (Google Antigravity Workspace) のメタフレームワーク・リポジトリです。
+本プロジェクトは、従来の開発プロセスの制約（重力）から解放された、新しい開発体験を提供するための実験的プラットフォームであり、次世代のエージェント駆動型開発の基盤となります。
 
-This workspace incorporates an advanced governance model composed of **49+ definition files**, centered around the "Golden Triangle" to achieve autonomous project management:
+本ワークスペースは、**49以上の定義ファイル** から構成される高度なガバナンスモデルを内包しており、以下の「ゴールデントライアングル」を中心に自律的なプロジェクト運営を実現します：
 
-1.  **Tech Stack Rule (`stack.md`)**: Standardization of technology selection
-2.  **Operational Rule (`ops.md`)**: Definition of operational processes
-3.  **Core Workflows**: Automation of the development cycle
+1.  **Tech Stack Rule (`stack.md`)**: 技術選定の標準化
+2.  **Operational Rule (`ops.md`)**: 運用プロセスの規定
+3.  **Core Workflows**: 開発サイクルの自動化
 
 ## Features
 
-GA-Workspace is designed based on the following principles:
+GA-Workspaceは以下の原則に基づいて設計されています：
 
-- **Recursive Composition**: Hierarchical combination of rules and workflows enables efficient resolution of complex tasks.
-- **Rule-based Governance**: Agents make autonomous decisions and actions according to policies defined in `.agent/rules`.
-- **Automated Workflows**: The entire development cycle is automated based on procedures defined in `.agent/workflows`.
+- **Recursive Composition (再帰的合成)**: ルールとワークフローの階層的な組み合わせにより、複雑なタスクを効率的に解決します。
+- **Rule-based Governance (ルール駆動ガバナンス)**: `.agent/rules` に定義されたポリシーに従い、エージェントが自律的に判断・行動します。
+- **Automated Workflows (ワークフロー自動化)**: `.agent/workflows` に定義された手順書に基づき、開発サイクル全体を自動化します。
 
 ## Included Capabilities
 
-This repository comes pre-configured with the following rules and workflows.
+本リポジトリには、以下のルールとワークフローが事前設定されています。
 
 ### Rules (Governance)
 | Category | Files |
@@ -89,44 +89,44 @@ graph TD
 
 ## Getting Started
 
-This repository functions as a **Source (template)** for new GA-Workspace projects.
+このリポジトリは、新しいGA-Workspaceプロジェクトの **Source (雛形)** として機能します。
 
-### 1. Create a New Project
+### 1. 新規プロジェクトの作成
 
 ```bash
-# Initialize via Agent workflow
+# Agentワークフローによる初期化
 /setup-ga-workspace
 ```
 
-### 2. Convert an Existing Project to GA-Workspace
+### 2. 既存プロジェクトのGA-Workspace化
 
 ```bash
-# Convert target directory
+# 対象ディレクトリの変換
 /create-repo-from-folder
 ```
 
-### 3. Extend Your Environment
+### 3. 環境の拡張
 
 ```bash
-# Define new rules
+# 新規ルールの策定
 /create-rule
 
-# Define new workflows
+# 新規ワークフローの定義
 /create-workflow
 ```
 
-## 🎨 Showcase: Projects You Can Create!
+## 🎨 Showcase: こんなプロジェクトが作れるよ！
 
-Here are example projects created with ZERO_GRAVITY.
+ZERO_GRAVITYで作成されたプロジェクトの事例です。
 
 | Project | Description | Link |
 |---------|-------------|------|
-| **🎬 vidu-mv-creator** | End-to-end music video production workspace using Suno V5 × Vidu Q2 | [![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?style=flat-square&logo=github)](https://github.com/Sunwood-ai-labs/vidu-mv-creator) |
-| **📚 WRITING_WORKSPACE** | GA-Workspace template specialized for writing & content creation | *Coming Soon* |
-| **🛰️ YOROZU** | The ultimate workspace for Agent-Driven Engineering (ADE). The foundation of strict governance. | [![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?style=flat-square&logo=github)](https://github.com/Sunwood-ai-labs/YOROZU) |
+| **🎬 vidu-mv-creator** | Suno V5 × Vidu Q2 でミュージックビデオを一気通貫制作するワークスペース | [![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?style=flat-square&logo=github)](https://github.com/Sunwood-ai-labs/vidu-mv-creator) |
+| **📚 WRITING_WORKSPACE** | 執筆・コンテンツ制作に特化したGA-Workspaceテンプレート | *準備中* |
+| **🛰️ YOROZU** | エージェント主導開発（ADE）の究極のワークスペース。厳格なガバナンスの礎。 | [![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?style=flat-square&logo=github)](https://github.com/Sunwood-ai-labs/YOROZU) |
 
 > [!TIP]
-> Run `/setup-ga-workspace` to start your own GA-Workspace project right away.
+> `/setup-ga-workspace` を実行すれば、あなただけの GA-Workspace プロジェクトをすぐに始められるよ。
 
 ---
 
