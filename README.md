@@ -112,9 +112,18 @@ graph TD
 /create-workflow
 ```
 
-## Related Projects
+## 🎨 Showcase: こんなプロジェクトが作れるよ！
 
-- **[YOROZU](https://github.com/Sunwood-ai-labs/YOROZU)**: The foundation of strict governance.
+ZERO_GRAVITYで作成されたプロジェクトの事例です。
+
+| Project | Description | Link |
+|---------|-------------|------|
+| **🎬 vidu-mv-creator** | Suno V5 × Vidu Q2 でミュージックビデオを一気通貫制作するワークスペース | [![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?style=flat-square&logo=github)](https://github.com/Sunwood-ai-labs/vidu-mv-creator) |
+| **📚 WRITING_WORKSPACE** | 執筆・コンテンツ制作に特化したGA-Workspaceテンプレート | *準備中* |
+| **🛰️ YOROZU** | エージェント主導開発（ADE）の究極のワークスペース。厳格なガバナンスの礎。 | [![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?style=flat-square&logo=github)](https://github.com/Sunwood-ai-labs/YOROZU) |
+
+> [!TIP]
+> `/setup-ga-workspace` を実行すれば、あなただけの GA-Workspace プロジェクトをすぐに始められるよ。
 
 ---
 
