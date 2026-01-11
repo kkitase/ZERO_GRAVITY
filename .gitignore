@@ -32,9 +32,7 @@ ANTIGRAVITY_AGENT_CONTROL_SPEC.MD
 
 # ZG_PROJECT/
 ZG_PROJECT/*
-!ZG_PROJECT/vidu-mv-creator/
 .SourceSageAssets/
 COMMIT_MSG.txt
 MERGE_MSG.txt
 release_notes.md
-
